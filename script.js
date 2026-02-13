@@ -1,194 +1,599 @@
-"use strict";
+'strict';
 alert("WELCOME TO ONLINE HAND CRICKET");
-let num = 0, i, opbat = 0, total = 0;
-let ch = Number(prompt("ENTER 1 FOR CRAZY MODE AND 2 FOR NORMAL MODE"));
+let num = 0, runs = 0, rund = 0, i, t, bt, balls, counter;
+const ch = prompt("ENTER 1 FOR CRAZY MODE AND 2 FOR NORMAL MODE");
 const overs = prompt("ENTER THE NUMBER OF OVERS TO BE PLAYED");
 const toss = prompt("ENTER H FOR HEADS AND T FOR TAILS");
-let op = Math.random() < 0.5 ? "BL" : "BT";
-function mybat(overs) {
-    for (i = 1; i <= overs * 6; i++) {
-        let bowl = Math.floor(Math.random() * 11);
-        num = prompt("Enter a number to score in the " + i + "th ball");
-        if (num != bowl - 1 && num != bowl + 1) {
-            console.log("Scored " + num + " in the " + i + "th ball");
-            total = total + Number(num);
-        }
-        else
-            if (i == 1 && (num === bowl - 1 || num === bowl + 1)) {
-                console.log("Bowled at 1st ball");
-                console.log("Scored 0 runs");
-                num = 0;
-                break;
+t = Math.random() < 0.5 ? "H" : "T";
+op = Math.random() < 0.5 ? "BL" : "BT";
+if (overs > 0) {
+    switch (ch) {
+        case '1':
+            if (toss.toUpperCase() === t) {
+                alert("YOU WON THE TOSS");
+                let t1 = prompt("ENTER BT FOR BATTING AND BL FOR BOWLING ").toUpperCase();
+                switch (t1) {
+                    case 'BT':
+                        alert("YOU WON THE TOSS AND CHOOSE TO BAT");
+                        counter = 0;
+                        balls = overs * 6;
+                        for (balls = overs * 6; balls > 0; balls--) {
+                            i = Math.floor(Math.random() * 11);
+                            num = Number(prompt("ENTER A NUMBER BETWEEN 0 AND 10"));
+                            if (num == i) {
+                                runs = runs + Math.pow(num, 2);
+                                alert("HITS DOUBLE💥💥");
+                                alert(`${Math.pow(num, 2)} IN ${counter + 1} BALL
+                            TOTAL : ${runs} RUNS`);
+                                counter++;
+                            }
+                            else
+                                if ((num - 1) == i || (num + 1) == i) {
+                                    alert(`WICKET
+                                      TOTAL : ${runs} RUNS`);
+                                    console.log(`YOU LOST THE WICKET AT ${counter + 1} BALL`);
+                                    balls = 0;
+                                    break;
+                                }
+                                else {
+                                    runs = runs + Number(num);
+                                    alert(`${num} RUN IN ${counter + 1} BALL
+                                    TOTAL : ${runs} RUNS`);
+                                    counter++;
+                                }
+                        }
+                        if (counter === 0) {
+                            console.log(`YOU SCORED : 0 RUNS`);
+                        }
+                        else {
+                            console.log(`YOU SCORED : ${runs} RUNS IN ${counter + 1} BALLS`);
+                        }
+                        alert("TIME TO DEFEND");
+                        console.log(`TIME TO DEFEND ${runs + 1} RUNS`);
+                        counter = 0;
+                        balls = overs * 6;
+                        for (balls = overs * 6; balls > 0; balls--) {
+                            i = Math.floor(Math.random() * 11);
+                            num = Number(prompt("ENTER A NUMBER BETWEEN 0 AND 10"));
+                            if (num == i) {
+                                rund = rund + Math.pow(num, 2);
+                                alert("OPPONENT HITS DOUBLE💥💥");
+                                alert(`${Math.pow(i, 2)} IN ${counter + 1} BALL
+                            TOTAL : ${rund} RUNS`);
+                                counter++
+                            }
+                            else
+                                if ((num - 1) == i || (num + 1) == i) {
+                                    alert(`WICKET
+                                      TOTAL : ${runs} RUNS`);
+                                    console.log(`HOW'S THAT!!!!! \n OPPONENT LOST THE WICKET AT ${counter + 1}  BALL`);
+                                    balls = 0;
+                                    break;
+                                }
+                                else {
+                                    rund = rund + Number(i);
+                                    alert(`${i} RUN IN ${counter + 1} BALL
+                                 TOTAL : ${rund} RUNS`);
+                                    counter++;
+                                }
+                        }
+                        if (counter === 0) {
+                            console.log(`THEY SCORED : 0 RUNS`);
+                        }
+                        else {
+                            console.log(`THEY SCORED : ${rund} RUNS IN ${counter} BALLS`);
+                        }
+                        if (runs > rund) {
+                            console.log(`YOU WON THE MATCH BY  ${runs - rund} RUNS`);
+                        }
+                        else
+                            if (runs == rund) {
+                                console.log("MATCH DRAW");
+                            }
+                            else
+                                console.log(`OPPONENT WON THE MATCH BY ${rund - runs} RUNS`);
+                        break;
+                    case 'BL':
+                        alert("YOU WON THE TOSS AND CHOOSE TO BOWL");
+                        counter = 0;
+                        balls = overs * 6;
+                        for (balls = overs * 6; balls > 0; balls--) {
+                            i = Math.floor(Math.random() * 11);
+                            num = Number(prompt("ENTER A NUMBER BETWEEN 0 AND 10"));
+                            if (num == i) {
+                                rund = rund + Math.pow(num, 2);
+                                alert("OPPONENT HITS DOUBLE💥💥");
+                                alert(`${Math.pow(i, 2)} IN ${counter + 1} BALL
+                            TOTAL : ${rund} RUNS`);
+                                counter++;
+                            }
+                            else
+                                if ((num - 1) == i || (num + 1) == i) {
+                                    alert(`WICKET
+                                      TOTAL : ${rund} RUNS`);
+                                    console.log(`HOW'S THAT!!!!! \n OPPONENT LOST THE WICKET AT ${counter + 1} BALL`);
+                                    balls = 0;
+                                    break;
+                                }
+                                else {
+                                    rund = rund + Number(i);
+                                    alert(` ${i} RUN IN ${counter + 1} BALL
+                            TOTAL : ${rund} RUNS`);
+                                    counter++;
+                                }
+                        }
+                        if (counter === 0) {
+                            console.log(`THEY SCORED : 0 RUNS`);
+                        }
+                        else {
+                            console.log(`THEY SCORED : ${rund} RUNS IN ${counter} BALLS`);
+                        }
+                        alert("TIME TO CHASE THE TARGET");
+                        console.log(`TIME TO CHASE ${rund + 1} RUNS`);
+                        counter = 0;
+                        balls = overs * 6;
+                        for (balls = overs * 6; balls > 0; balls--) {
+                            i = Math.floor(Math.random() * 11);
+                            num = Number(prompt("ENTER A NUMBER BETWEEN 0 AND 10"));
+                            if (num == i) {
+                                runs = runs + Math.pow(num, 2);
+                                alert("HITS DOUBLE💥💥");
+                                alert(`${Math.pow(i, 2)} IN ${counter + 1} BALL
+                             TOTAL : ${runs} RUNS`);
+                                counter++;
+                            }
+                            else
+                                if ((num - 1) == i || (num + 1) == i) {
+                                    alert(`WICKET
+                                      TOTAL : ${runs} RUNS`);
+                                    console.log(`YOU LOST THE WICKET AT ${counter + 1} BALL`);
+                                    balls = 0;
+                                    break;
+                                }
+                                else {
+                                    runs = runs + Number(num);
+                                    alert(`${num} RUN IN ${counter + 1} BALL
+                                 TOTAL : ${runs} RUNS`);
+                                    counter++;
+                                }
+                        }
+                        if (counter === 0) {
+                            console.log(`YOU SCORED : 0 RUNS`);
+                        }
+                        else {
+                            console.log(`YOU SCORED : ${runs} RUNS IN ${counter} BALL`);
+                        }
+                        if (runs > rund) {
+                            console.log(`YOU WON THE MATCH BY  ${runs - rund} RUNS`);
+                        }
+                        else
+                            if (runs == rund) {
+                                console.log("MATCH DRAW");
+                            }
+                            else
+                                console.log(`OPPONENT WON THE MATCH BY ${rund - runs} RUNS`);
+                }
             }
             else {
-                alert("Bowled");
-                console.log("Bowled! at " + i + "th ball");
-                break;
+                alert("YOU LOST THE TOSS");
+                if (op === "BT") {
+                    alert("OPPONENT CHOOSE TO BAT FIRST");
+                    counter = 0;
+                    balls = overs * 6;
+                    for (balls = overs * 6; balls > 0; balls--) {
+                        i = Math.floor(Math.random() * 11);
+                        num = Number(prompt("ENTER A NUMBER BETWEEN 0 AND 10"));
+                        if (num == i) {
+                            rund = rund + Math.pow(num, 2);
+                            alert("OPPONENT HITS DOUBLE💥💥");
+                            alert(`${Math.pow(i, 2)} IN ${counter + 1} BALL
+                        TOTAL : ${rund} RUNS`);
+                            counter++;
+                        }
+                        else
+                            if ((num - 1) == i || (num + 1) == i) {
+                                alert(`WICKET
+                                      TOTAL : ${rund} RUNS`);
+                                console.log(`HOW'S THAT!!!!! \n OPPONENT LOST THE WICKET AT ${counter + 1} BALL`);
+                                balls = 0;
+                                break;
+                            }
+                            else {
+                                rund = rund + Number(i);
+                                alert(`${i} RUN IN ${counter + 1} BALL
+                             TOTAL : ${rund} RUNS`);
+                                counter++;
+                            }
+                    }
+                    if (counter === 0) {
+                        console.log(`THEY SCORED : 0 RUNS`);
+                    }
+                    else {
+                        console.log(`THEY SCORED : ${rund} RUNS IN ${counter} BALLS`);
+                    }
+                    alert("TIME TO CHASE");
+                    console.log(`TIME TO CHASE ${rund + 1} RUNS`);
+                    counter = 0;
+                    balls = overs * 6;
+                    for (balls = overs * 6; balls > 0; balls--) {
+                        i = Math.floor(Math.random() * 11);
+                        num = Number(prompt("ENTER A NUMBER BETWEEN 0 AND 10"));
+                        if (num == i) {
+                            runs = runs + Math.pow(num, 2);
+                            alert("HITS DOUBLE💥💥");
+                            alert(`${Math.pow(num, 2)} IN ${counter + 1} BALL
+                        TOTAL : ${runs} RUNS`);
+                            counter++;
+                        }
+                        else
+                            if ((num - 1) == i || (num + 1) == i) {
+                                alert(`WICKET
+                                      TOTAL : ${runs} RUNS`);
+                                console.log(`YOU LOST THE WICKET AT ${counter + 1} BALL
+                                 TOTAL : ${runs} RUNS`);
+                                balls = 0;
+                                break;
+                            }
+                            else {
+                                runs = runs + Number(num);
+                                alert(`${num} RUN IN ${counter + 1} BALL
+                             TOTAL : ${runs} RUNS`);
+                                counter++;
+                            }
+                    }
+                    if (counter === 0) {
+                        console.log(`YOU SCORED : 0 RUNS`);
+                    }
+                    else { console.log(`YOU SCORED : ${runs} RUNS IN ${counter} BALLS`); }
+                    if (runs > rund) {
+                        console.log(`YOU WON THE MATCH BY  ${runs - rund} RUNS`);
+                    }
+                    else
+                        if (runs == rund) {
+                            console.log("MATCH DRAW");
+                        }
+                        else
+                            console.log(`OPPONENT WON THE MATCH BY ${rund - runs} RUNS`)
+                }
+                else {
+                    alert("OPPONENT CHOOSE TO BOWL FIRST");
+                    counter = 0;
+                    balls = overs * 6;
+                    for (balls = overs * 6; balls > 0; balls--) {
+                        i = Math.floor(Math.random() * 11);
+                        num = Number(prompt("ENTER A NUMBER BETWEEN 0 AND 10"));
+                        if (num == i) {
+                            runs = runs + Math.pow(num, 2);
+                            alert("HITS DOUBLE💥💥");
+                            alert(`${Math.pow(num, 2)} IN ${counter + 1} BALL
+                        TOTAL : ${runs} RUNS`);
+                            counter++;
+                        }
+                        else
+                            if ((num - 1) == i || (num + 1) == i) {
+                                alert(`WICKET
+                                      TOTAL : ${runs} RUNS`);
+                                console.log(`YOU LOST THE WICKET AT ${counter + 1} BALL`);
+                                balls = 0;
+                                break;
+                            }
+                            else {
+                                runs = runs + Number(num);
+                                alert(`${num} RUN IN ${counter + 1} BALL
+                                 TOTAL : ${runs} RUNS`);
+                                counter++;
+                            }
+                    }
+                    if (counter === 0) {
+                        console.log(`YOU SCORED : 0 RUNS`);
+                    }
+                    else { console.log(`YOU SCORED : ${runs} RUNS IN ${counter} BALLS`); }
+                    alert("TIME TO DEFEND");
+                    console.log(`TIME TO DEFEND ${runs + 1} RUNS`);
+                    counter = 0;
+                    balls = overs * 6;
+                    for (balls = overs * 6; balls > 0; balls--) {
+                        i = Math.floor(Math.random() * 11);
+                        num = Number(prompt("ENTER A NUMBER BETWEEN 0 AND 10"));
+                        if (num == i) {
+                            rund = rund + Math.pow(num, 2);
+                            alert("OPPONENT HITS DOUBLE💥💥");
+                            alert(`${Math.pow(i, 2)} IN ${counter + 1} BALL
+                        TOTAL : ${rund} RUNS`);
+                            counter++;
+                        }
+                        else
+                            if ((num - 1) == i || (num + 1) == i) {
+                                alert(`WICKET
+                                      TOTAL : ${runs} RUNS`);
+                                console.log(`HOW'S THAT!!!!! \n OPPONENT LOST THE WICKET AT ${counter + 1}  BALL`);
+                                balls = 0;
+                                break;
+                            }
+                            else {
+                                rund = rund + Number(i);
+                                alert(`${i} RUN IN ${counter + 1} BALL
+                             TOTAL : ${rund} RUNS`);
+                                counter++;
+                            }
+                    }
+                    if (counter === 0) {
+                        console.log(`THEY SCORED : 0 RUNS`);
+                    }
+                    else { console.log(`THEY SCORED : ${rund} RUNS IN ${counter} BALLS`); }
+                    if (runs > rund) {
+                        console.log(`YOU WON THE MATCH BY  ${runs - rund} RUNS`);
+                    }
+                    else
+                        if (runs == rund) {
+                            console.log("MATCH DRAW");
+                        }
+                        else
+                            console.log(`OPPONENT WON THE MATCH BY ${rund - runs} RUNS`);
+                }
             }
+            break;
+        case '2':
+            if (toss.toUpperCase() === t) {
+                alert("YOU WON THE TOSS");
+                let t2 = prompt("ENTER BT FOR BATTING AND BL FOR BOWLING ").toUpperCase();
+                switch (t2) {
+                    case 'BT':
+                        alert("YOU WON THE TOSS AND CHOOSE TO BAT");
+                        counter = 0;
+                        balls = overs * 6;
+                        for (balls = overs * 6; balls > 0; balls--) {
+                            i = Math.floor(Math.random() * 11);
+                            num = Number(prompt("ENTER A NUMBER BETWEEN 0 AND 10"));
+                            if (num == i) {
+                                alert(`WICKET
+                                      TOTAL : ${runs} RUNS`);
+                                console.log(`YOU LOST THE WICKET AT ${counter + 1} BALL`);
+                                balls = 0;
+                                break;
+                            }
+                            else {
+                                runs = runs + Number(num);
+                                alert(`${num} RUN IN ${counter + 1} BALL
+                                TOTAL : ${runs} RUNS`);
+                                counter++;
+                            }
+                        }
+                        if (counter === 0) {
+                            console.log(`YOU SCORED : 0 RUNS`);
+                        }
+                        else { console.log(`YOU SCORED : ${runs} RUNS IN ${counter} BALLS`); }
+                        alert("TIME TO DEFEND");
+                        console.log(`TIME TO DEFEND ${runs + 1} RUNS`);
+                        counter = 0;
+                        balls = overs * 6;
+                        for (balls = overs * 6; balls > 0; balls--) {
+                            i = Math.floor(Math.random() * 11);
+                            num = Number(prompt("ENTER A NUMBER BETWEEN 0 AND 10"));
+                            if (num == i) {
+                                alert(`WICKET
+                                      TOTAL : ${rund} RUNS`);
+                                console.log(`HOW'S THAT!!!!! \n OPPONENT LOST THE WICKET AT ${counter + 1} BALL`);
+                                balls = 0;
+                                break;
+                            }
+                            else {
+                                rund = rund + Number(i);
+                                alert(`${i} RUN IN ${counter + 1} BALL
+                                TOTAL : ${rund} RUNS`);
+                                counter++;
+                            }
+                        }
+                        if (counter === 0) {
+                            console.log(`THEY SCORED : 0 RUNS`);
+                        }
+                        else { console.log(`THEY SCORED : ${rund} RUNS IN ${counter} BALLS`); }
+                        if (runs > rund) {
+                            console.log(`YOU WON THE MATCH BY  ${runs - rund} RUNS`);
+                        }
+                        else
+                            if (runs === rund) {
+                                console.log("MATCH DRAW");
+                            }
+                            else
+                                console.log(`OPPONENT WON THE MATCH BY ${rund - runs} RUNS`);
+                        break;
+                    case 'BL':
+                        alert("YOU WON THE TOSS AND CHOOSE TO BOWL");
+                        counter = 0;
+                        balls = overs * 6;
+                        for (balls = overs * 6; balls > 0; balls--) {
+                            i = Math.floor(Math.random() * 11);
+                            num = Number(prompt("ENTER A NUMBER BETWEEN 0 AND 10"));
+                            if (num == i) {
+                                alert(`WICKET
+                                      TOTAL : ${rund} RUNS`);
+                                console.log(`HOW'S THAT!!!!! \n OPPONENT LOST THE WICKET AT ${counter + 1} BALL`);
+                                balls = 0;
+                                break;
+                            }
+                            else {
+                                rund = rund + Number(i);
+                                alert(`${i} RUN IN ${counter + 1} BALL
+                                TOTAL : ${rund} RUNS`);
+                                counter++;
+                            }
+                        }
+                        if (counter === 0) {
+                            console.log(`THEY SCORED : 0 RUNS`);
+                        }
+                        else { console.log(`THEY SCORED : ${rund} RUNS IN ${counter} BALLS`); }
+                        console.log(`TARGET : ${rund + 1} RUNS IN ${counter} BALLS`);
+                        alert("TIME TO CHASE");
+                        console.log(`TIME TO CHASE ${rund + 1} RUNS`);
+                        counter = 0;
+                        balls = overs * 6;
+                        for (balls = overs * 6; balls > 0; balls--) {
+                            i = Math.floor(Math.random() * 11);
+                            num = Number(prompt("ENTER A NUMBER BETWEEN 0 AND 10"));
+                            if (num == i) {
+                                alert(`WICKET
+                                      TOTAL : ${runs} RUNS`);
+                                console.log(`YOU LOST THE WICKET AT ${counter + 1} BALL`);
+                                balls = 0;
+                                break;
+                            }
+                            else {
+                                runs = runs + Number(num);
+                                alert(`${num} RUN IN ${counter + 1} BALL
+                                  TOTAL : ${runs} RUNS`);
+                                counter++;
+                            }
+                        }
+                        if (counter === 0) {
+                            console.log(`YOU SCORED : 0 RUNS`);
+                        }
+                        else { console.log(`YOU SCORED : ${runs} RUNS IN ${counter} BALLS`); }
+                        if (runs > rund) {
+                            console.log(`YOU WON THE MATCH BY  ${runs - rund} RUNS`);
+                        }
+                        else
+                            if (runs === rund) {
+                                console.log("MATCH DRAW");
+                            }
+                            else {
+                                console.log(`OPPONENT WON THE MATCH BY ${rund - runs} RUNS`);
+                            }
+                }
+            }
+            else {
+                alert("YOU LOST THE TOSS");
+                let op = Math.random() < 0.5 ? "BL" : "BT";
+                op == "BT" ? alert("OPPONENT CHOOSE TO BAT FIRST") : alert("OPPONENT CHOOSE TO BALL FIRST");
+                if (op === "BT") {
+                    counter = 0;
+                    balls = overs * 6;
+                    for (balls = overs * 6; balls > 0; balls--) {
+                        i = Math.floor(Math.random() * 11);
+                        num = Number(prompt("ENTER A NUMBER BETWEEN 0 AND 10"));
+                        if (num == i) {
+                            alert(`WICKET
+                                      TOTAL : ${rund} RUNS`);
+                            console.log(`HOW'S THAT!!!!! \n OPPONENT LOST THE WICKET AT ${counter + 1} BALL`);
+                            balls = 0;
+                            break;
+                        }
+                        else {
+                            rund = rund + Number(i);
+                            alert(`${i} RUN IN ${counter + 1} BALL
+                            TOTAL : ${rund} RUNS`);
+                            counter++;
+                        }
+                    }
+                    if (counter === 0) {
+                        console.log(`THEY SCORED : 0 RUNS`);
+                    }
+                    else { console.log(`THEY SCORED : ${rund} RUNS IN ${counter} BALLS`); }
+                    console.log(`TARGET : ${rund} RUNS IN ${counter} BALLS`);
+                    alert("TIME TO CHASE THE TARGET");
+                    console.log(`TIME TO CHASE ${rund + 1} RUNS`);
+                    counter = 0;
+                    balls = overs * 6;
+                    for (balls = overs * 6; balls > 0; balls--) {
+                        i = Math.floor(Math.random() * 11);
+                        num = Number(prompt("ENTER A NUMBER BETWEEN 0 AND 10"));
+                        if (num == i) {
+                            alert(`WICKET
+                                      TOTAL : ${runs} RUNS`);
+                            console.log(`YOU LOST THE WICKET AT ${counter + 1} BALL`);
+                            balls = 0;
+                            break;
+                        }
+                        else {
+                            runs = runs + Number(num);
+                            alert(`${num} RUN IN ${counter + 1} BALL
+                             TOTAL : ${runs} RUNS`);
+                            counter++;
+                        }
+                    }
+                    if (counter === 0) {
+                        console.log(`YOU SCORED : 0 RUNS`);
+                    }
+                    else { console.log(`YOU SCORED : ${runs} RUNS IN ${counter} BALLS`); }
+                    if (runs > rund) {
+                        console.log(`YOU WON THE MATCH BY  ${runs - rund} RUNS`);
+                    }
+                    else
+                        if (runs === rund) {
+                            console.log("MATCH DRAW");
+                        }
+                        else
+                            console.log(`OPPONENT WON THE MATCH BY ${rund - runs} RUNS`)
+                }
+                else {
+                    counter = 0;
+                    balls = overs * 6;
+                    for (balls = overs * 6; balls > 0; balls--) {
+                        i = Math.floor(Math.random() * 11);
+                        num = Number(prompt("ENTER A NUMBER BETWEEN 0 AND 10"));
+                        if (num == i) {
+                            alert(`WICKET
+                                      TOTAL : ${runs} RUNS`);
+                            console.log(`YOU LOST THE WICKET AT ${counter + 1} BALL`);
+                            balls = 0;
+                            break;
+                        }
+                        else {
+                            runs = runs + Number(num);
+                            alert(`${num} RUN IN ${counter + 1} BALL
+                            TOTAL : ${runs} RUNS`);
+                            counter++;
+                        }
+                    }
+                    if (counter === 0) {
+                        console.log(`YOU SCORED : 0 RUNS`);
+                    }
+                    else { console.log(`YOU SCORED : ${runs} RUNS IN ${counter} BALLS`); }
+                    alert("TIME TO DEFEND");
+                    console.log(`TIME TO DEFEND ${runs + 1} RUNS`);
+                    counter = 0;
+                    balls = overs * 6;
+                    for (balls = overs * 6; balls > 0; balls--) {
+                        i = Math.floor(Math.random() * 11);
+                        num = Number(prompt("ENTER A NUMBER BETWEEN 0 AND 10"));
+                        if (num == i) {
+                            alert(`WICKET
+                                      TOTAL : ${rund} RUNS`);
+                            console.log(`HOW'S THAT!!!!! \n OPPONENT LOST THE WICKET AT ${counter + 1} BALL`);
+                            balls = 0;
+                            break;
+                        }
+                        else {
+                            rund = rund + Number(i);
+                            alert(`${i} IN ${counter + 1} BALL
+                            TOTAL : ${rund} RUNS`);
+                            counter++;
+                        }
+                    }
+                    if (counter === 0) {
+                        console.log(`THEY SCORED : 0 RUNS`);
+                    }
+                    else { console.log(`THEY SCORED : ${rund} RUNS IN ${counter} BALLS`); }
+                    if (runs > rund) {
+                        console.log(`YOU WON THE MATCH BY  ${runs - rund} RUNS`);
+                    }
+                    else
+                        if (runs === rund) {
+                            console.log("MATCH DRAW");
+                        }
+                        else
+                            console.log(`OPPONENT WON THE MATCH BY ${rund - runs} RUNS`);
+                }
+            }
+            break;
+        case 'default':
+            console.log(`WRONG INPUT REFRESH AND RETRY AGAIN`);
+            break;
     }
 }
-function mybowl(overs) {
-    for (i = 1; i <= overs * 6; i++) {
-        let bat = Math.floor(Math.random() * 11);
-        num = prompt("Enter a number to to defend the ball");
-        if (bat != num - 1 && bat != num + 1) {
-            console.log("Scored " + bat +" in "+i+"th ball");
-            opbat = opbat + Number(bat);
-        }
-        else
-            if (i == 1 && (num == bat - 1 || num == bat + 1)) {
-                console.log("Bowled at 1st ball");
-                console.log("Scored 0 runs");
-                bat = 0;
-                break;
-            }
-            else {
-                alert("Opponent got Bowled");
-                console.log("Bowled! at " + i + "th ball");
-                break;
-            }
-    }
+else {
+    alert(`NO GAME PLAYED`);
 }
-function normybat(overs){
-    for (i = 1; i <= overs * 6; i++) {
-        let bowl = Math.floor(Math.random() * 11);
-        num = prompt("Enter a number to score in the " + i + "th ball");
-        if (num != bowl) {
-            console.log("Scored " + num + " in the " + i + "th ball");
-            total = total + Number(num);
-        }
-        else
-            if (i == 1 && (num === bowl)) {
-                console.log("Bowled at 1st ball");
-                console.log("Scored 0 runs");
-                num = 0;
-                break;
-            }
-            else {
-                alert("Bowled");
-                console.log("Bowled! at " + i + "th ball");
-                break;
-            }
-    }
-}
-function normybowl(overs) {
-    for (i = 1; i <= overs * 6; i++) {
-        let bat = Math.floor(Math.random() * 11);
-        num = prompt("Enter a number to to defend the ball");
-        if (bat != num) {
-            console.log("Scored " + bat +" in "+i+"th ball");
-            opbat = opbat + Number(bat);
-        }
-        else
-            if (i == 1 && (num === bat)) {
-                console.log("Bowled at 1st ball");
-                console.log("Scored 0 runs");
-                bat = 0;
-                break;
-            }
-            else {
-                alert("Opponent got Bowled");
-                console.log("Bowled! at " + i + "th ball");
-                break;
-            }
-    }
-}
-let t = Math.random() < 0.5 ? "H" : "T";
-switch (ch) {
-    case 1:
-        if (toss.toUpperCase() == t) {
-            alert("you won the toss");
-            let choice = prompt("ENTER 1 TO BAT AND 2 TO  BOWL");
-            if (choice == 1) {
-                console.log("choose to bat first");
-                mybat(overs);
-                console.log("Target given : " + Number(total+1));
-                alert("Target given : " + Number(total+1));
-                mybowl(overs);
-            }
-            else {
-                console.log("choose to bowl first");
-                mybowl(overs);
-                alert("Target to chase : " + Number(opbat+1));
-                console.log("Target to chase :" + Number(opbat+1));
-                mybat(overs);
-            }
-            if (total > opbat) { console.log("Won by " + (total - opbat) + " runs"); }
-            else
-                if (total < opbat) { console.log("Lost by " + (opbat - total) + " runs"); }
-                else {
-                    console.log("MAtch draw");
-                }
-        }
-        else {
-            alert("you lost the toss");
-            if (op == "BL") {
-                console.log("opponent choice is to bowl first.");
-                mybat(overs);
-                alert("Target given : " + Number(total+1));
-                console.log("Target given : " + Number(total+1));
-                mybowl(overs);
-            }
-            else {
-                console.log("opponent choice is to bat first.");
-                mybowl(overs);
-                alert("Target to chase : " + Number(opbat+1));
-                console.log("Target to chase :" + Number(opbat+1));
-                mybat(overs);
-            }
-            if (total > opbat) { console.log("Won by " + (total - opbat) + " runs"); }
-            else
-                if (total < opbat) { console.log("Lost by " + (opbat - total) + " runs"); }
-                else {
-                    console.log("MAtch draw");
-                }
-        }
-        break;
-    case 2:
-        if (toss == t) {
-            alert("you won the toss");
-            let choice = prompt("ENTER 1 TO BAT AND 2 TO  BOWL");
-            if (choice == 1) {
-                console.log("choose to bat first");
-                normybat();
-                console.log("Target given : " + Number(total+1));
-                normybowl();
-            }
-            else {
-                console.log("choose to bowl first");
-                normybowl();
-                console.log("Target to chase :" + Number(opbat+1));
-                normybat();
-            }
-            if (total > opbat) { console.log("Won by " + (total - opbat) + " runs"); }
-            else
-                if (total < opbat) { console.log("Lost by " + (opbat - total) + " runs"); }
-                else {
-                    console.log("MAtch draw");
-                }
-        }
-        else {
-            alert("you lost the toss");
-            if (op == "BL") {
-                console.log("opponent choice is to bowl first.");
-                normybat();
-                console.log("Target given : " + Number(total+1));
-                normybowl();
-            }
-            else {
-                console.log("opponent choice is to bat first.");
-                normybowl();
-                console.log("Target to chase :" + Number(opbat+1));
-                normybat();
-            }
-            if (total > opbat) { console.log("Won by " + (total - opbat) + " runs"); }
-            else
-                if (total < opbat) { console.log("Lost by " + (opbat - total) + " runs"); }
-                else {
-                    console.log("MAtch draw");
-                }
-        }
-        break;
-    default: console.log("Wrong choice! Try again");
-}
-
+let rating = prompt("GIVE US A RATING FOR THIS GAME BETWEEN 1 TO 5");
+console.log(`USER GAVE A ${rating}-STAR RATING`);
+console.log(`RADHE-RADHE`);
